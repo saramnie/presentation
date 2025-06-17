@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PuffTrack Full Prototype</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .app {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .screen {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      color: white;
+      text-align: center;
+    }
+    .screen.active {
+      display: flex;
+    }
+    .card {
+      background: white;
+      color: #333;
+      border-radius: 25px;
+      padding: 20px;
+      margin: 20px 0;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .btn {
+      padding: 15px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .green { background: #4CAF50; color: white; }
+    .blue { background: #2196F3; color: white; }
+    .coral { background: #f76c6c; color: white; }
+    .purple { background: #9c27b0; }
+    .emoji { font-size: 70px; margin-bottom: 15px; }
+    .nav {
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- 1: Streak Celebration -->
+    <div class="screen active" style="background: linear-gradient(135deg, #ff6b6b, #feca57);">
+      <div class="emoji">🐼</div>
+      <div class="card">
+        <h2>30-DAY STREAK!</h2>
+        <p>+10 XP · New Emoji Pack<br>🏆 Streak Badge</p>
+      </div>
+      <button class="btn green nav" onclick="nextScreen()">Share Achievement</button>
+    </div>
+
+    <!-- 2: Leaderboard -->
+    <div class="screen" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+      <h2>Monthly Champions</h2>
+      <div class="card">🥈 Anna 184<br>🥇 Alex 201<br>🥉 Sam 167</div>
+      <div class="card" style="font-size: 14px;">€15 café credit<br>+ Community clean-up invite</div>
+      <div class="card coral" style="font-size: 14px; background: #f76c6c; color: white;">
+        You're #5 — only 12 scans from bronze! 🔥
+      </div>
+      <button class="btn green nav" onclick="nextScreen()">Next</button>
+    </div>
+
+    <!-- 3: Coffee & Clean-Up -->
+    <div class="screen" style="background: linear-gradient(135deg, #757f9a, #d7dde8); color: #fff;">
+      <h2>Coffee & Clean-Up Meetup</h2>
+      <p>Redeem your voucher & meet fellow eco-smokers<br>at our monthly community gathering.</p>
+      <button class="btn green">Redeem Voucher</button>
+      <div style="font-size: 28px; margin-top: 20px;">☕🌱👥</div>
+      <button class="btn green nav" onclick="nextScreen()">Next</button>
+    </div>
+
+    <!-- 4: Streak Lost -->
+    <div class="screen" style="background: linear-gradient(135deg, #bdc3c7, #2c3e50);">
+      <div class="emoji">🐼💔</div>
+      <div class="card">
+        <p>📅 Streak broken<br><strong>Let's start fresh tomorrow</strong></p>
+      </div>
+      <button class="btn blue nav" onclick="nextScreen()">Restart Journey</button>
+    </div>
+
+    <!-- 5: Impact Dashboard -->
+    <div class="screen" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+      <h2>Your Impact Dashboard</h2>
+      <div class="card">Level 7 → Level 8<br>1,420 / 2,000 XP</div>
+      <div class="card">187 butts recycled = 374g micro-plastics prevented</div>
+      <div class="card">🐝 Bee Hive Goal<br>3 days left to sponsor</div>
+      <button class="btn green nav" onclick="nextScreen()">Next</button>
+    </div>
+
+    <!-- 6: Epilogue -->
+    <div class="screen" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+      <div class="emoji">🏙️🌳🎪</div>
+      <div class="card">
+        <p>Every scan counts.<br>Keep puffing, keep cleaning. 🌍</p>
+      </div>
+      <button class="btn coral">Continue Scanning</button>
+    </div>
+  </div>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    let current = 0;
+    function nextScreen() {
+      screens[current].classList.remove('active');
+      current = (current + 1) % screens.length;
+      screens[current].classList.add('active');
+    }
+  </script>
+</body>
+</html>
